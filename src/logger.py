@@ -1,6 +1,10 @@
+# pyright: reportOptionalMemberAccess=false
+# pyright: reportShadowedImports=false
+
 import logging
 import os
 from datetime import datetime
+
 
 def setup():
     LOG_FILE_NAME = datetime.now().strftime("%H_%M_%S") + ".log"
@@ -14,6 +18,7 @@ def setup():
         level=logging.INFO,
         format="[%(asctime)s] %(lineno)d %(name)s - %(levelname)s - %(message)s",
     )
+
 
 def log(message):
     logging.info(message)
