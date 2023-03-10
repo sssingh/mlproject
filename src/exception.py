@@ -7,18 +7,13 @@ from src import logger
 logger.setup()
 
 
-def detail_error(message) -> str:
-    _, _, trace_back_obj = sys.exc_info()  # get error traceback object
-    file_name = trace_back_obj.tb_frame.f_code.co_filename
-    line_no = trace_back_obj.tb_lineno  # type: ignore
-    error_message = f"Error occured in file:[{file_name}], at line-no:[{line_no}], error-message:[{message}]"
-    return error_message
-
-
 class CustomException(Exception):
     def __init__(self, message):
         super().__init__()
-        self.error_message = detail_error(message)
+        _, _, trace_back_obj = sys.exc_info()  # get error traceback object
+        file_name = trace_back_obj.tb_frame.f_code.co_filename
+        line_no = trace_back_obj.tb_lineno  # type: ignore
+        self.error_message = f"Error occured in file:[{file_name}], at line-no:[{line_no}], error-message:[{message}]"
 
     def __str__(self):
         return self.error_message
